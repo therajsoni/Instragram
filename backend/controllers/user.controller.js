@@ -147,6 +147,7 @@ export const logout = async (_, res) => {
       let user = await User.findById(userId).populate({
         path : 'posts',createdAt : -1
       }).populate('bookmarks');
+
       
       
       return res.status(200).json({
