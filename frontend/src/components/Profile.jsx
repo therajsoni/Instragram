@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import useGetUserProfile from "@/hooks/useGetUserProfile";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
-import { AtSign } from "lucide-react";
+import { AtSign, Heart, MessageCircle } from "lucide-react";
 
 const Profile = () => {
   const params = useParams();
@@ -13,9 +13,9 @@ const Profile = () => {
   useGetUserProfile(userId);
   const [activeTab, setActiveTab] = useState('posts');
 
-  const { userProfile } = useSelector((store) => store.auth);
+  const { userProfile ,user} = useSelector((store) => store.auth);
 
-  const isLoggedInUserProfile = true;
+  const isLoggedInUserProfile = user?._id === userProfile?._id;
   const isFollowing = false;
 
 
@@ -47,12 +47,14 @@ setActiveTab(tab);
                 {isLoggedInUserProfile ? (
                   <>
                     <>
-                      <Button
+                    <Link to={"/account/edit"}>
+                    <Button
                         className="hover:bg-gray-200 h-8"
                         variant="secondary"
                       >
                         Edit profile
                       </Button>
+                    </Link>
                       <Button
                         className="hover:bg-gray-200 h-8"
                         variant="secondary"
@@ -87,19 +89,19 @@ setActiveTab(tab);
               <div className="flex items-center gap-4">
                 <p>
                   <span className="font-semibold">
-                    {userProfile?.posts.length}
+                    {userProfile?.posts?.length}
                   </span>
                   posts
                 </p>
                 <p>
                   <span className="font-semibold">
-                    {userProfile?.followers.length}
+                    {userProfile?.followers?.length}
                   </span>
                   followers
                 </p>
                 <p>
                   <span className="font-semibold">
-                    {userProfile?.following.length}
+                    {userProfile?.following?.length}
                   </span>
                   following
                 </p>
@@ -132,7 +134,18 @@ setActiveTab(tab);
               return (
                 <div key={post?._id} className="relative group cursor-pointer">
                   <img src={post?.image} alt="postimage" className="rounded-sm my-2 w-full aspect-sqaure object-cover" />
-
+                   <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                     <div className="flex items-center text-white space-x-4">
+                      <button className="flex items-center gap-2 hover:text-gray-300" >
+                        <Heart/>
+                        <span>{post?.likes?.length}</span>
+                      </button>
+                      <button className="flex items-center gap-2 hover:text-gray-300" >
+                        <MessageCircle/>
+                        <span>{post?.comments?.length}</span>
+                      </button>
+                      </div>    
+                    </div>
                 </div>
               )
             })
