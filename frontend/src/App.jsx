@@ -79,9 +79,15 @@ const socketio  = io(`http://localhost:8000`,{
 });
 dispatch(setSocket(socketio));
 // listen all the events
+// getOnlineUsers
 socketio.on('getOnlineUsers',(onlineUsers)=>{
   dispatch(setOnlineUsers(onlineUsers));
 })
+
+console.log("online :");
+
+
+console.log(setOnlineUsers);
 
 socketio.on('notification',(notification)=>{
   dispatch(setLikeNotification(notification));

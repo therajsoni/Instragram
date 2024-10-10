@@ -11,14 +11,20 @@ export const sendMessage  = async(req,res) => {
         const {textMessage:message} = req.body;
      
 
+        if(!message){
+            console.log("message not added!");
+            res.status(400).json({
+                success:false,
+                message : "message not here"
+            })
+            
+        }
+
         let conversation = await Conversation.findOne({
         participants :  {
             $all : [senderId , receiverId]
         }
-        })
-
-
-        
+        })        
         if(!conversation){
             conversation = await Conversation.create({
                 participants : [senderId,receiverId]  
