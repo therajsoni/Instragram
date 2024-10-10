@@ -133,12 +133,12 @@ setActiveTab(tab);
             displayedPost?.map((post)=>{
               return (
                 <div key={post?._id} className="relative group cursor-pointer">
-                  <img src={post?.image} alt="postimage" className="rounded-sm my-2 w-full aspect-sqaure object-cover" />
+                  <img src={post.image} alt="postimage" className="rounded-sm my-2 w-full aspect-sqaure object-cover" />
                    <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                      <div className="flex items-center text-white space-x-4">
                       <button className="flex items-center gap-2 hover:text-gray-300" >
                         <Heart/>
-                        <span>{post?.likes?.length}</span>
+                        <span>{post?.likes.length}</span>
                       </button>
                       <button className="flex items-center gap-2 hover:text-gray-300" >
                         <MessageCircle/>
