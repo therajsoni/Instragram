@@ -42,3 +42,29 @@ export async function getAllBlogs(req, res) {
         });
     }
 }
+
+
+const deleteOneBlog = async() => {
+    try {
+        
+        const a = await Blog.findById(req.params.id);
+        if(!a){
+            return res.status(500).json({
+                success: false,
+                message: "Failed to find blog"
+            });
+        }
+
+        await Blog.findByIdAndDelete({_id:req.params.id});
+        return res.status(200).json({
+            success: true,
+            message: "delete blog"
+        });
+
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: "Failed to deleted blog"
+        });
+    }
+}

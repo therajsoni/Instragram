@@ -128,7 +128,7 @@ setActiveTab(tab);
             <span className="p-3 cursor-pointer">TAGS</span>
           </div>
         </div>
-        <div className="grid grid-cols-3 gap-3">
+        <div className="grid grid-cols-3 gap-3 ml-36">
           {
             displayedPost?.map((post)=>{
               return (
