@@ -30,7 +30,8 @@ app.use(express.json());
 app.use(cookieParser())
 app.use(urlencoded({extends:true}))
 const corsOptions = {
-    origin : "http://localhost:5173",
+    origin : "http://localhost:5173",  
+    methods: ["GET", "POST"],
     credentials : true   
 }
 app.use(cors(corsOptions));

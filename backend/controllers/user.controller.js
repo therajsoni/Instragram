@@ -297,3 +297,9 @@ export const logout = async (_, res) => {
       console.log(error);
     }
   };
+
+
+export const getAllUser = async(req,res) => {
+const allUser =await User.find({  _id: { $ne: req.id }})
+return res.status(200).json({allUser : allUser,success : true});
+}

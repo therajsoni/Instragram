@@ -19,7 +19,7 @@ export const addNewPost = async (req, res) => {
         height: 800,
         fit: "inside",
       })
-      .toFormat("jpeg", { quantity: 80 })
+      .toFormat("jpeg", { quanlity: 80 })
       .toBuffer();
 
     const fileUri = `data:image/jpeg;base64,${optimizedImageBuffer.toString(
@@ -59,7 +59,7 @@ export const getAllPost = async (req, res) => {
         sort: { createdAt: -1 },
         populate: {
           path: "author",
-          select: "username , profilePicture",
+          select: "username  profilePicture",
         },
       });
     return res.status(200).json({
@@ -77,14 +77,14 @@ export const getUserPost = async (req, res) => {
       .sort({ createdAt: -1 })
       .populate({
         path: "author",
-        select: "username",
+        select: "username , profilePicture",
       })
       .populate({
         path: "comments",
         sort: { createdAt: -1 },
         populate: {
           path: "author",
-          select: "username , profilePicture",
+          select: "username  profilePicture",
         },
       });
     return res.status(200).json({
@@ -225,7 +225,7 @@ export const getCommentsOfPost = async(req,res) => {
     try {
         
         const postId = req.params.id;
-        const comments = await Comment.find({post : postId}).populate('author' , 'username' , 'profilePicture');
+        const comments = await Comment.find({post : postId}).populate('author' , 'username profilePicture');
         if(!comments)return res.status(400).json({ message : 'No comments found for this post' , success : false });
         return res.status(200).json({success : true,comments})
 
