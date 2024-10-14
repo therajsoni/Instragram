@@ -19,7 +19,7 @@ export const addNewPost = async (req, res) => {
         height: 800,
         fit: "inside",
       })
-      .toFormat("jpeg", { quantity: 80 })
+      .toFormat("jpeg", { quanlity: 80 })
       .toBuffer();
 
     const fileUri = `data:image/jpeg;base64,${optimizedImageBuffer.toString(
