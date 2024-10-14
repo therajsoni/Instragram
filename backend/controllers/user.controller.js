@@ -4,7 +4,6 @@ import jwt from "jsonwebtoken";
 import getDataUri from "../utils/datauri.js";
 import cloudinary from "../utils/cloudinary.js";
 import { Post } from "../models/post.model.js";
-import mongoose from "mongoose";
 
 
 // ------------------------------------------------------
@@ -146,11 +145,7 @@ export const logout = async (_, res) => {
     try {
       const userId = req.params.id;
     
-      // new add
-      //  Convert userId to ObjectId if it's a valid string
-      // if (!mongoose.Types.ObjectId.isValid(userId)) {
-      //   return res.status(400).json({ success: false, message: "Invalid user ID" });
-      // }
+    
       
     // previos
       let user = await User.findById(userId).populate({
@@ -302,3 +297,9 @@ export const logout = async (_, res) => {
       console.log(error);
     }
   };
+
+
+export const getAllUser = async(req,res) => {
+const allUser =await User.find({  _id: { $ne: req.id }})
+return res.status(200).json({allUser : allUser,success : true});
+}

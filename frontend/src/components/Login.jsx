@@ -16,7 +16,7 @@ const Login = () => {
   });
 
   const [loading, setLoading] = useState(false);
-  const {user} = useSelector(stote => stote.auth)
+  const {user} = useSelector(store => store.auth)
 
   const changeEventHandler = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });

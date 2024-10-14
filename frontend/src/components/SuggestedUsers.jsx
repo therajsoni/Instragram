@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-scroll'
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
 
 const SuggestedUsers = () => {
@@ -10,16 +10,17 @@ const SuggestedUsers = () => {
 
   return (
     <div className='my-10'>
-      <div className='flex items-center justify-between text-sm'>
+       {/* overflow-y-auto h-[280px] */}
+      <div className='flex items-center justify-between text-sm mb-4 '>
         <h1 className='font-semibold text-gray-600'>Suggested for you</h1>
         <span className='font-medium cursor-pointer'>See All</span>
       </div>
 { suggestedUsers &&
   suggestedUsers.map((user) => {
     return (
-      <div key={user._id} className='flex justify-between items-center'>
+      <div key={user._id} className='flex justify-between items-center '>
         <div className="flex items-center gap-2">
-         <Link to={"/profile/${user?._id}"}>
+         <Link to={`/profile/${user?._id}`}>
          <Avatar>
             <AvatarImage src={user?.profilePicture} alt="post_image" />
             <AvatarFallback>CN</AvatarFallback>

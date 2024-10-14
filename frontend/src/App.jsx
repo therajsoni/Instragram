@@ -14,7 +14,9 @@ import { setSocket } from './redux/socketSlice'
 import { setOnlineUsers } from './redux/chatSlice'
 import { setLikeNotification } from './redux/rtnSlice'
 import ProtectedRoute from './components/ProtectedRoute'
-
+import SearchPage from './components/Search'
+import Tread from './components/Tread'
+import Explore from './components/Explore'
 
 const browserRouter = createBrowserRouter([
   {
@@ -50,6 +52,14 @@ const browserRouter = createBrowserRouter([
           <ChatPage/>
           </ProtectedRoute>
           
+      },
+      {
+        path : '/searchPage',
+        element : <SearchPage/>
+      },
+      {
+        path : '/explore',
+        element : <Explore/>
       }
     ]
   },
@@ -79,9 +89,15 @@ const socketio  = io(`http://localhost:8000`,{
 });
 dispatch(setSocket(socketio));
 // listen all the events
+// getOnlineUsers
 socketio.on('getOnlineUsers',(onlineUsers)=>{
   dispatch(setOnlineUsers(onlineUsers));
 })
+
+console.log("online :");
+
+
+console.log(setOnlineUsers);
 
 socketio.on('notification',(notification)=>{
   dispatch(setLikeNotification(notification));

@@ -47,6 +47,11 @@ const ChatPage = () => {
     };
   },[]);
 
+
+  
+  
+
+
   return (
     <div className="flex ml-[16%] h-screen">
       <section className="w-full md:w-1/4 my-8">
@@ -54,8 +59,9 @@ const ChatPage = () => {
         <hr className="mb-4 border-gray-300" />
         <div className="overflow-y-auto h-[80vh]">
           {suggestedUsers.map((suggestedUser) => {
-            const isOnline = onlineUsers.includes(suggestedUser?._id);
+            const isOnline = onlineUsers?.includes(suggestedUser?._id);
 
+              
             return (
               <div
                 onClick={() => dispatch(setSelectedUser(suggestedUser))}
